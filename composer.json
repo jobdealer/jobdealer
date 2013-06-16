@@ -10,7 +10,7 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendframework": ">2.2.0rc1",
-		  "doctrine/common": ">=2.1",
-		  "murganikolay/smarty-module": "1.0.0"
+        "doctrine/common": ">=2.1",
+        "murganikolay/smarty-module": "1.0.0"
     }
 }
