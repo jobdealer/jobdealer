@@ -27,28 +27,42 @@
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
-                <div class="container">
+                <div class="container-fluid">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="{$this->url('home')}">{$this->translate('Skeleton Application')}</a>
+                    <a class="brand" href="{$this->url('home')}">{$this->translate('JobDealer')}</a>
                     <div class="nav-collapse collapse">
+                        <p class="navbar-text pull-right">
+                            Logged in as <a href="#" class="navbar-link">Username</a>
+                        </p>
                         <ul class="nav">
-                            <li class="active"><a href="{$this->url('home')}">{$this->translate('Home')}</a></li>
+                            <li{if $this->url() == $this->url('home')} class="active"{/if}>
+                                <a href="{$this->url('home')}">{$this->translate('Home')}</a>
+                            </li>
+                            <li{if $this->url() == $this->url('server')} class="active"{/if}>
+                                <a href="{$this->url('server')}">{$this->translate('Server')}</a>
+                            </li>
+                            <li{if $this->url() == $this->url('task')} class="active"{/if}>
+                                <a href="{$this->url('task')}">{$this->translate('Task')}</a>
+                            </li>
+                            <li{if $this->url() == $this->url('workflow')} class="active"{/if}>
+                                <a href="{$this->url('workflow')}">{$this->translate('Workflow')}</a>
+                            </li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             {$this->content}
             <hr>
-<!--            <footer>
-                <p>&copy; 2005 - {date('Y')} by Zend Technologies Ltd. {$this->translate('All rights reserved.')}</p>
+            <footer>
+                <p>&copy; 2013 - {date('Y')} by JobDealer's Team {$this->translate('All rights reserved.')}</p>
             </footer>
--->
+
         </div> <!-- /container -->
         {$this->inlineScript()}
     </body>
