@@ -97,6 +97,21 @@ return array(
                     ),
                 ),
             ),
+            'api' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/api[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Api',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -123,7 +138,8 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Server' => 'Application\Controller\ServerController',
             'Application\Controller\Task' => 'Application\Controller\TaskController',
-            'Application\Controller\Workflow' => 'Application\Controller\WorkflowController'
+            'Application\Controller\Workflow' => 'Application\Controller\WorkflowController',
+            'Application\Controller\Api' => 'Application\Controller\ApiController'
         ),
     ),
     'view_manager' => array(
