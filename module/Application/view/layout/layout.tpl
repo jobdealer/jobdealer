@@ -39,7 +39,7 @@
                             Logged in as <a href="#" class="navbar-link">Username</a>
                         </p>
                         <ul class="nav">
-                            <li{if $this->url() == $this->url('home')} class="active"{/if}>
+                            <li{if $smarty.server.REQUEST_URI == $this->url('home')} class="active"{/if}>
                                 <a href="{$this->url('home')}">{$this->translate('Dashboard')}</a>
                             </li>
                             <li{if $this->url() == $this->url('server')} class="active"{/if}>
@@ -51,7 +51,7 @@
                             <li{if $this->url() == $this->url('workflow')} class="active"{/if}>
                                 <a href="{$this->url('workflow')}">{$this->translate('Workflow')}</a>
                             </li>
-                            <li{if $this->url() == '/about'} class="active"{/if}>
+                            <li{if $smarty.server.REQUEST_URI == '/about'} class="active"{/if}>
                                 <a href="/about">{$this->translate('About')}</a>
                             </li>
                         </ul>
