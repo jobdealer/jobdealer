@@ -18,7 +18,7 @@
         <!-- Scripts -->
         <script type="text/javascript" charset="utf-8" src="./js/html5.js"></script>
         <script type="text/javascript" charset="utf-8" src="./js/bootstrap.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./js/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./js/jquery-1.10.1.min.js"></script>
         {*$this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
                                       ->prependFile($this->basePath() . '/js/bootstrap.min.js')
                                       ->prependFile($this->basePath() . '/js/jquery.min.js')*}
