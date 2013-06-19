@@ -9,6 +9,7 @@
 
 namespace Application\Controller;
 
+use SmartyModule\View\Renderer\SmartyRenderer;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -20,6 +21,8 @@ class IndexController extends AbstractActionController
     }
     public function aboutAction()
     {
-        return new ViewModel();
+        $view = new ViewModel();
+        $view->zendversion = \Zend\Version\Version::VERSION;
+        return $view;
     }
 }

@@ -1,5 +1,6 @@
 <div class="hero-unit">
     <h1>{$this->translate('Welcome to JobDealer')}</h1>
+    <p>Based on Zend {$zendversion}</p>
     <p>{$this->translate('Congratulations! You have successfully installed the JobDealer')}</p>
     <p><a class="btn btn-success btn-large" href="https://github.com/changi67/jobdealer" target="_blank">{$this->translate('Fork JobDealer on GitHub')} &raquo;</a></p>
 </div>
