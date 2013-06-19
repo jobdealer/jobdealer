@@ -50,6 +50,52 @@ return array(
                     ),
                 ),
             ),
+            'server' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/server[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Server',
+                        'action'        => 'index',
+                    ),
+                ),
+
+            ),
+            'task' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/task[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Task',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+            'workflow' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/workflow[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Workflow',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -73,7 +119,10 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Server' => 'Application\Controller\ServerController',
+            'Application\Controller\Task' => 'Application\Controller\TaskController',
+            'Application\Controller\Workflow' => 'Application\Controller\WorkflowController'
         ),
     ),
     'view_manager' => array(
