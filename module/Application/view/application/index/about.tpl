@@ -1,6 +1,6 @@
 <div class="hero-unit">
     <h1>{$this->translate('Welcome to JobDealer')}</h1>
-    <p>Based on Zend {$zendversion}</p>
+    <p id="version">Based on Zend {$zendversion} / {$smarty.version} / Bootstrap v2.3.2 / jQuery </p>
     <p>{$this->translate('Congratulations! You have successfully installed the JobDealer')}</p>
     <p><a class="btn btn-success btn-large" href="https://github.com/changi67/jobdealer" target="_blank">{$this->translate('Fork JobDealer on GitHub')} &raquo;</a></p>
 </div>
@@ -31,3 +31,5 @@
         <p><script type="text/javascript" src="http://www.ohloh.net/p/642207/widgets/project_languages.js"></script></p>
     </div>
 </div>
+
+<script type="text/javascript">$(document).ready(function() { $('#version').append($().jquery); });</script>
