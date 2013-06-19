@@ -40,7 +40,7 @@
                         </p>
                         <ul class="nav">
                             <li{if $this->url() == $this->url('home')} class="active"{/if}>
-                                <a href="{$this->url('home')}">{$this->translate('Home')}</a>
+                                <a href="{$this->url('home')}">{$this->translate('Dashboard')}</a>
                             </li>
                             <li{if $this->url() == $this->url('server')} class="active"{/if}>
                                 <a href="{$this->url('server')}">{$this->translate('Server')}</a>
@@ -50,6 +50,9 @@
                             </li>
                             <li{if $this->url() == $this->url('workflow')} class="active"{/if}>
                                 <a href="{$this->url('workflow')}">{$this->translate('Workflow')}</a>
+                            </li>
+                            <li{if $this->url() == '/about'} class="active"{/if}>
+                                <a href="/about">{$this->translate('About')}</a>
                             </li>
                         </ul>
                     </div><!--/.nav-collapse -->
