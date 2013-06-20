@@ -1,3 +1,0 @@
-{literal}
-{"success": true}
-{/literal}
