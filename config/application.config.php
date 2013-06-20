@@ -4,7 +4,7 @@ return array(
     'modules' => array(
         'Application',
         'Api',
-        'SmartyModule',
+        'SmartyModule', // need to be the last because of the strategies of Smarty
     ),
 
     // These are various options for the listeners attached to the ModuleManager
