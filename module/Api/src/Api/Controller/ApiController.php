@@ -21,29 +21,35 @@ class ApiController extends AbstractRestfulController
 {
     public function getList()
     {
-        $result = new JsonModel(array('data' => 'success'));
+        $result = new JsonModel(array('list' => 'success'));
         return $result;
     }
 
     public function get($id)
     {
-        $result = new JsonModel(array('data' => 'success'));
+        $result = new JsonModel(array('get' => 'success', 'id' => $id));
         $result->setTerminal(true);
         return $result;
     }
 
     public function create($data)
     {
-        # code...
+        $result = new JsonModel(array('create' => "success", "data" => $data));
+        $result->setTerminal(true);
+        return $result;
     }
 
     public function update($id, $data)
     {
-        # code...
+        $result = new JsonModel(array('update' => "success", 'data' => $data, 'id' => $id));
+        $result->setTerminal(true);
+        return $result;
     }
 
     public function delete($id)
     {
-        # code...
+        $result = new JsonModel(array('remove' => 'success', 'id' => $id, "who" => $_SERVER['REMOTE_ADDR']));
+        $result->setTerminal(true);
+        return $result;
     }
 }
