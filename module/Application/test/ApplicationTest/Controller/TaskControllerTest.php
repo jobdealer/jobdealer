@@ -4,14 +4,14 @@ namespace ApplicationTest\Controller;
 
 use ApplicationTest\Bootstrap;
 use Zend\Mvc\Router\Http\TreeRouteStack as HttpRouter;
-use Application\Controller\ServerController;
+use Application\Controller\TaskController;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use PHPUnit_Framework_TestCase;
 
-class ServerControllerTest extends \PHPUnit_Framework_TestCase
+class TaskControllerTest extends \PHPUnit_Framework_TestCase
 {
     protected $controller;
     protected $request;
@@ -22,7 +22,7 @@ class ServerControllerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $serviceManager = Bootstrap::getServiceManager();
-        $this->controller = new ServerController();
+        $this->controller = new TaskController();
         $this->request    = new Request();
         $this->routeMatch = new RouteMatch(array('controller' => 'index'));
         $this->event      = new MvcEvent();
@@ -38,15 +38,6 @@ class ServerControllerTest extends \PHPUnit_Framework_TestCase
     public function testIndexActionCanBeAccessed()
     {
         $this->routeMatch->setParam('action', 'index');
-
-        $result   = $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-
-        $this->assertEquals(200, $response->getStatusCode());
-    }
-    public function testStatusActionCanBeAccessed()
-    {
-        $this->routeMatch->setParam('action', 'status');
 
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();

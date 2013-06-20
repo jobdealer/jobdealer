@@ -4,14 +4,14 @@ namespace ApplicationTest\Controller;
 
 use ApplicationTest\Bootstrap;
 use Zend\Mvc\Router\Http\TreeRouteStack as HttpRouter;
-use Application\Controller\IndexController;
+use Application\Controller\ServerController;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use PHPUnit_Framework_TestCase;
 
-class IndexControllerTest extends \PHPUnit_Framework_TestCase
+class ServerControllerTest extends \PHPUnit_Framework_TestCase
 {
     protected $controller;
     protected $request;
@@ -22,7 +22,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $serviceManager = Bootstrap::getServiceManager();
-        $this->controller = new IndexController();
+        $this->controller = new ServerController();
         $this->request    = new Request();
         $this->routeMatch = new RouteMatch(array('controller' => 'index'));
         $this->event      = new MvcEvent();
@@ -44,9 +44,9 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
     }
-    public function testAboutActionCanBeAccessed()
+    public function testStatusActionCanBeAccessed()
     {
-        $this->routeMatch->setParam('action', 'about');
+        $this->routeMatch->setParam('action', 'status');
 
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();

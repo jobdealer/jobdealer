@@ -44,4 +44,13 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
     }
+    public function testAboutActionCanBeAccessed()
+    {
+        $this->routeMatch->setParam('action', 'about');
+
+        $result   = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

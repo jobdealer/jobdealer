@@ -4,6 +4,7 @@
     <testsuites>
         <testsuite name="jobdealer">
             <directory>./ApplicationTest</directory>
+            <directory>./ApiTest</directory>
         </testsuite>
     </testsuites>
 </phpunit>

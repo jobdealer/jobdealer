@@ -37,7 +37,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     }
     public function testGetListActionCanBeAccessed()
     {
-        $this->routeMatch->setParam('action', 'index');
+        $this->routeMatch->setParam('id', '');
 
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -46,7 +46,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     }
     public function testGetActionCanBeAccessed()
     {
-        $this->routeMatch->setParam('action', '1');
+        $this->routeMatch->setParam('id', '1');
 
         $result   = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
