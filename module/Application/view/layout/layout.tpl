@@ -2,27 +2,24 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        {*$this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false)*}
+        {$this->headTitle('JobDealer')->setSeparator(' - ')->setAutoEscape(false)}
 
         {$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0')}
+        {$basePath = $this->basePath()}
 
+        {$this->headLink([ 'rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' =>
+        "`$basePath`/images/favicon.ico"])}
         <!-- Le styles -->
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-        {*$this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
-                        ->prependStylesheet($this->basePath() . '/css/style.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')*}
+        <link rel="stylesheet" type="text/css" href="{$basePath}/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" type="text/css" href="{$basePath}/css/style.css">
+        <link rel="stylesheet" type="text/css" href="{$basePath}/css/bootstrap.min.css">
+        {$this->headLink}
 
         <!-- Scripts -->
-        <script type="text/javascript" charset="utf-8" src="./js/html5.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./js/bootstrap.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="./js/jquery-1.10.1.min.js"></script>
-        {*$this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                                      ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-                                      ->prependFile($this->basePath() . '/js/jquery.min.js')*}
-
+        <script type="text/javascript" charset="utf-8" src="{$basePath}/js/html5.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{$basePath}/js/bootstrap.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{$basePath}/js/jquery-1.10.1.min.js"></script>
+        {$this->headScript()}
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
