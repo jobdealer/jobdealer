@@ -17,10 +17,15 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        #$this->getServiceLocator()
+        #     ->get('viewhelpermanager')
+        #     ->get('HeadScript')
+        #     ->appendFile('/js/');
         return new ViewModel();
     }
     public function aboutAction()
     {
+
         $view = new ViewModel();
         $view->zendversion = \Zend\Version\Version::VERSION;
         return $view;
