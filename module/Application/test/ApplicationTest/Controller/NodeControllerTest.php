@@ -4,14 +4,14 @@ namespace ApplicationTest\Controller;
 
 use ApplicationTest\Bootstrap;
 use Zend\Mvc\Router\Http\TreeRouteStack as HttpRouter;
-use Application\Controller\ServerController;
+use Application\Controller\NodeController;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use PHPUnit_Framework_TestCase;
 
-class ServerControllerTest extends \PHPUnit_Framework_TestCase
+class NodeControllerTest extends \PHPUnit_Framework_TestCase
 {
     protected $controller;
     protected $request;
@@ -22,7 +22,7 @@ class ServerControllerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $serviceManager = Bootstrap::getServiceManager();
-        $this->controller = new ServerController();
+        $this->controller = new NodeController();
         $this->request    = new Request();
         $this->routeMatch = new RouteMatch(array('controller' => 'index'));
         $this->event      = new MvcEvent();

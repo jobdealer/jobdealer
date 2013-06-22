@@ -11,13 +11,13 @@
 
 
     <div class="span6">
-        <h2>{$this->translate('Task from the past')}</h2>
+        <h2>{$this->translate('Jobs from the past')}</h2>
         <table class="table">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Task</th>
-                <th>Server</th>
+                <th>Job</th>
+                <th>Node</th>
                 <th>Status</th>
             </tr>
             </thead>
@@ -25,25 +25,25 @@
             <tr class="success">
                 <td>1</td>
                 <td>backup</td>
-                <td>server1</td>
+                <td>node1</td>
                 <td>Finished</td>
             </tr>
             <tr class="error">
                 <td>2</td>
                 <td>backup</td>
-                <td>server2</td>
+                <td>node2</td>
                 <td>Error</td>
             </tr>
             <tr class="warning">
                 <td>3</td>
                 <td>poller reindex</td>
-                <td>server3</td>
+                <td>node3</td>
                 <td>Still running</td>
             </tr>
             <tr class="warning">
                 <td>4</td>
                 <td>poller reindex</td>
-                <td>server3</td>
+                <td>node3</td>
                 <td>Did not start yet</td>
             </tr>
             </tbody>
@@ -51,13 +51,13 @@
     </div>
 
     <div class="span6">
-        <h2>{$this->translate('Task for the future')}</h2>
+        <h2>{$this->translate('Jobs for the future')}</h2>
         <table class="table">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Task</th>
-                <th>Server</th>
+                <th>Job</th>
+                <th>node</th>
                 <th>Status</th>
             </tr>
             </thead>
@@ -65,19 +65,19 @@
             <tr class="info">
                 <td>1</td>
                 <td>poller reindex</td>
-                <td>server3</td>
+                <td>node3</td>
                 <td>pending</td>
             </tr>
             <tr class="info">
                 <td>2</td>
                 <td>poller reindex</td>
-                <td>server3</td>
+                <td>node3</td>
                 <td>pending</td>
             </tr>
             <tr class="info">
                 <td>3</td>
                 <td>poller reindex</td>
-                <td>server3</td>
+                <td>node3</td>
                 <td>pending</td>
             </tr>
             </tbody>

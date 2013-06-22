@@ -51,33 +51,33 @@ return array(
 #                    ),
 #                ),
 #            ),
-            'server' => array(
+            'node' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/server[/:action][/:id]',
+                    'route'    => '/node[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Server',
+                        'controller'    => 'Node',
                         'action'        => 'index',
                     ),
                 ),
 
             ),
-            'task' => array(
+            'job' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/task[/:action][/:id]',
+                    'route'    => '/job[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Task',
+                        'controller'    => 'Job',
                         'action'        => 'index',
                     ),
                 ),
@@ -121,8 +121,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Server' => 'Application\Controller\ServerController',
-            'Application\Controller\Task' => 'Application\Controller\TaskController',
+            'Application\Controller\Node' => 'Application\Controller\NodeController',
+            'Application\Controller\Job' => 'Application\Controller\JobController',
             'Application\Controller\Workflow' => 'Application\Controller\WorkflowController',
             'Application\Controller\Api' => 'Application\Controller\ApiController',
         ),

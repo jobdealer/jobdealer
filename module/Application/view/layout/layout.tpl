@@ -39,11 +39,11 @@
                             <li{if $smarty.server.REQUEST_URI == $this->url('home')} class="active"{/if}>
                                 <a href="{$this->url('home')}">{$this->translate('Dashboard')}</a>
                             </li>
-                            <li{if $this->url() == $this->url('server')} class="active"{/if}>
-                                <a href="{$this->url('server')}">{$this->translate('Server')}</a>
+                            <li{if $this->url() == $this->url('node')} class="active"{/if}>
+                                <a href="{$this->url('node')}">{$this->translate('Node')}</a>
                             </li>
-                            <li{if $this->url() == $this->url('task')} class="active"{/if}>
-                                <a href="{$this->url('task')}">{$this->translate('Task')}</a>
+                            <li{if $this->url() == $this->url('job')} class="active"{/if}>
+                                <a href="{$this->url('job')}">{$this->translate('Job')}</a>
                             </li>
                             <li{if $this->url() == $this->url('workflow')} class="active"{/if}>
                                 <a href="{$this->url('workflow')}">{$this->translate('Workflow')}</a>
