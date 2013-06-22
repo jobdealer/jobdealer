@@ -14,8 +14,26 @@ use Zend\View\Model\ViewModel;
 
 class JobController extends AbstractActionController
 {
+    protected $jobTable;
+
     public function indexAction()
     {
-        return new ViewModel();
+        try {
+            return new ViewModel(array(
+                'jobs' => $this->getJobTable()->fetchAll(),
+            ));
+        } catch (\Exception $e) {
+            $pdoException = $e->getPrevious();
+            var_dump($pdoException);
+        }
+
+    }
+    public function getJobTable()
+    {
+        if (!$this->jobTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobTable = $sm->get('Application\Model\JobTable');
+        }
+        return $this->jobTable;
     }
 }
