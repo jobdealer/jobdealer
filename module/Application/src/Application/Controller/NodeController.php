@@ -14,12 +14,30 @@ use Zend\View\Model\ViewModel;
 
 class NodeController extends AbstractActionController
 {
+    protected $nodeTable;
+
     public function indexAction()
     {
-        return new ViewModel();
+        try {
+            return new ViewModel(array(
+                'nodes' => $this->getNodeTable()->fetchAll(),
+            ));
+        } catch (\Exception $e) {
+            $pdoException = $e->getPrevious();
+            var_dump($pdoException);
+        }
     }
     public function statusAction()
     {
         return new ViewModel();
+    }
+
+    private function getNodeTable()
+    {
+        if (!$this->nodeTable) {
+            $sm = $this->getServiceLocator();
+            $this->nodeTable = $sm->get('Application\Model\NodeTable');
+        }
+        return $this->nodeTable;
     }
 }

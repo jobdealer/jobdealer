@@ -14,6 +14,9 @@ use Zend\Mvc\MvcEvent;
 
 use Application\Model\Job;
 use Application\Model\JobTable;
+use Application\Model\Node;
+use Application\Model\NodeTable;
+
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -56,6 +59,17 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Job());
                     return new TableGateway('job', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Application\Model\NodeTable' =>  function($sm) {
+                    $tableGateway = $sm->get('NodeTableGateway');
+                    $table = new NodeTable($tableGateway);
+                    return $table;
+                },
+                'NodeTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Node());
+                    return new TableGateway('node', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );
