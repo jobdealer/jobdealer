@@ -31,7 +31,18 @@ class NodeTable
     public function getNode($id)
     {
         $id  = (int) $id;
-        $rowset = $this->tableGateway->select(array('id' => $id));
+        $select = $this->tableGateway
+            ->getSql()
+            ->select()
+            ->columns(
+                array(
+                    '*' => '*' ,
+                    'ipaddr' => new Expression('INET_NTOA(ipaddr)'),
+                )
+            )->where(array('id' => $id));
+
+        $rowset = $this->tableGateway->selectWith($select);
+
         $row = $rowset->current();
         if (!$row) {
             throw new \Exception("Could not find row $id");
@@ -43,7 +54,7 @@ class NodeTable
     {
         $data = array(
             'nodename' => $Node->nodename,
-            'ipaddr'  => $Node->ipaddr,
+            'ipaddr'  => new Expression('INET_ATON(\'' . $Node->ipaddr . '\')'),
             'description' => $Node->description,
             'lastseen' => $Node->lastseen,
         );
