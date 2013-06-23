@@ -34,7 +34,7 @@ class JobTable
         $data = array(
             'description' => $job->description,
             'action'  => $job->action,
-            'schedule' => $job->schedule,
+            'defaultschedule' => $job->defaultschedule,
             'estimatedduration' => $job->estimatedduration,
         );
 

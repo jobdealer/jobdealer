@@ -6,7 +6,7 @@ class Job
     public $id;
     public $description;
     public $action;
-    public $schedule;
+    public $defaultschedule;
     public $estimatedduration;
 
     public function exchangeArray($data)
@@ -14,7 +14,7 @@ class Job
         $this->id     = (isset($data['id'])) ? $data['id'] : null;
         $this->description = (isset($data['description'])) ? $data['description'] : null;
         $this->action  = (isset($data['action'])) ? $data['action'] : null;
-        $this->schedule  = (isset($data['schedule'])) ? $data['schedule'] : null;
+        $this->defaultschedule  = (isset($data['defaultschedule'])) ? $data['defaultschedule'] : null;
         $this->estimatedduration  = (isset($data['estimatedduration'])) ? $data['estimatedduration'] : null;
     }
 
