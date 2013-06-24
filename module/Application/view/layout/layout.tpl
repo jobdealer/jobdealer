@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="{$basePath}/css/bootstrap-responsive.min.css">
         <link rel="stylesheet" type="text/css" href="{$basePath}/css/style.css">
         <link rel="stylesheet" type="text/css" href="{$basePath}/css/bootstrap.min.css">
-        {$this->headLink}
+        {$this->headLink()}
 
         <!-- Scripts -->
         <script type="text/javascript" charset="utf-8" src="{$basePath}/js/html5.js"></script>
