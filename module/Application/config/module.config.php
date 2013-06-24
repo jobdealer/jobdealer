@@ -109,7 +109,7 @@ return array(
         ),
     ),
     'translator' => array(
-        'locale' => 'fr_FR',
+        'locale' => 'en_US',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',
@@ -140,9 +140,15 @@ return array(
             'error/404'               => __DIR__ . '/../view/error/404.tpl',
             'error/index'             => __DIR__ . '/../view/error/index.tpl',
         ),
+        'smarty' => array(
+            'error_reporting'=> E_PARSE,
+            'compile_dir' => __DIR__ . '/../../../data/Smarty/templates_c',
+            //'cache_dir' => 'path/to/cache/dir',
+        ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
+
     ),
 /*    'view_manager' => array(
         'display_not_found_reason' => true,
