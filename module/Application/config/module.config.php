@@ -143,6 +143,7 @@ return array(
         'smarty' => array(
             'error_reporting'=> E_PARSE,
             'compile_dir' => __DIR__ . '/../../../data/Smarty/templates_c',
+            'plugins_dir' => __DIR__ . '/../../../library/smarty_plugins',
             //'cache_dir' => 'path/to/cache/dir',
         ),
         'template_path_stack' => array(

@@ -1,7 +1,9 @@
 <div class="hero-unit">
     <h2>{$this->translate('List of jobs')}</h2>
     <p>
-        <a href="{$this->url('job', ['action'=>'add'])}">Add new job</a>
+        <a href="{$this->url('job', ['action'=>'add'])}"  class="btn btn-success">
+            {$this->translate('Add new job')}
+        </a>
     </p>
     <table class="table table-bordered table-hover">
         <tr>
@@ -20,8 +22,10 @@
             <td>{$this->escapeHtml($job->defaultschedule)}</td>
             <td>{$this->escapeHtml($job->estimatedduration)}</td>
             <td>
-                <a href="{$this->url('job', ['action'=>'edit', 'id' => $job->id])}">Edit</a>
-                <a href="{$this->url('job', ['action'=>'delete', 'id' => $job->id])}">Delete</a>
+                {icon action='edit' title="{$this->translate('Edit')}"
+                    href="{$this->url('job', ['action'=>'edit', 'id' => $job->id])}"}
+                {icon action='delete' title="{$this->translate('Delete')}"
+                    href="{$this->url('job', ['action'=>'delete', 'id' => $job->id])}"}
             </td>
         </tr>
         {foreachelse}

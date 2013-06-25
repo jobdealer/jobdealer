@@ -18,6 +18,11 @@ class JobController extends AbstractActionController
 
     public function indexAction()
     {
+        $this->getServiceLocator()
+            ->get('viewhelpermanager')
+            ->get('HeadLink')
+            ->appendStylesheet('/css/famfamfam.css');
+
         try {
             return new ViewModel(array(
                 'jobs' => $this->getJobTable()->fetchAll(),
