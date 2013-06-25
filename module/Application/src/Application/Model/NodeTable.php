@@ -1,7 +1,7 @@
 <?php
 namespace Application\Model;
 
-use Zend\Db\Sql\Predicate\Expression;
+//use Zend\Db\Sql\Predicate\Expression;
 use Zend\Db\TableGateway\TableGateway;
 
 class NodeTable
@@ -15,7 +15,7 @@ class NodeTable
 
     public function fetchAll()
     {
-        $select = $this->tableGateway
+        /*$select = $this->tableGateway
             ->getSql()
             ->select()
             ->columns(
@@ -24,25 +24,26 @@ class NodeTable
                     'ipaddr' => new Expression('INET_NTOA(ipaddr)'),
                 )
             );
-        $resultSet = $this->tableGateway->selectWith($select);
+        $resultSet = $this->tableGateway->selectWith($select);*/
+        $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
 
     public function getNode($id)
     {
         $id  = (int) $id;
-        $select = $this->tableGateway
-            ->getSql()
-            ->select()
-            ->columns(
-                array(
-                    '*' => '*' ,
-                    'ipaddr' => new Expression('INET_NTOA(ipaddr)'),
-                )
-            )->where(array('id' => $id));
-
-        $rowset = $this->tableGateway->selectWith($select);
-
+        //$select = $this->tableGateway
+        //    ->getSql()
+        //    ->select()
+        //    ->columns(
+        //        array(
+        //            '*' => '*' ,
+        //            'ipaddr' => new Expression('INET_NTOA(ipaddr)'),
+        //        )
+        //    )->where(array('id' => $id));
+        //
+        //$rowset = $this->tableGateway->selectWith($select);
+        $rowset = $this->tableGateway->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row) {
             throw new \Exception("Could not find row $id");
@@ -54,7 +55,8 @@ class NodeTable
     {
         $data = array(
             'nodename' => $Node->nodename,
-            'ipaddr'  => new Expression('INET_ATON(\'' . $Node->ipaddr . '\')'),
+            //'ipaddr'  => new Expression('INET_ATON(\'' . $Node->ipaddr . '\')'),
+            'ipaddr'  => $Node->ipaddr,
             'description' => $Node->description,
             'lastseen' => $Node->lastseen,
         );
