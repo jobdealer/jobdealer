@@ -18,7 +18,7 @@ CREATE TABLE node (
   id int(11) NOT NULL auto_increment,
   nodename varchar(255) default null,
   description varchar(255) default null,
-  ipaddr int(10) unsigned NOT NULL,
+  ipaddr varchar(15) NOT NULL,
   lastseen datetime default null,
   PRIMARY KEY (id),
   key `ipaddr` (`ipaddr`)
