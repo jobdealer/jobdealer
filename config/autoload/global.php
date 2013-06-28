@@ -11,10 +11,19 @@
  * file.
  */
 
+$dbDSN = 'sqlite:' . dirname(__DIR__) . '/../data/databases/jobdealer.sqlite';
+
 return array(
-    'db' => array(
+/*    'db' => array(
         'driver'         => 'Pdo',
         'dsn'            => 'mysql:dbname=jobdealer;host=localhost',
+        'driver_options' => array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+        ),
+    ),MySQL*/
+    'db' => array(
+        'driver'         => 'Pdo',
+        'dsn'            => $dbDSN,
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ),

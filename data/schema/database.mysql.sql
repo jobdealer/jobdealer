@@ -1,9 +1,6 @@
 drop database jobdealer;
-
 create database jobdealer;
-
 use jobdealer;
-
 
 CREATE TABLE job (
   id int(11) NOT NULL auto_increment,
