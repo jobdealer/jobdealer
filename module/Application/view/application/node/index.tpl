@@ -1,5 +1,5 @@
 <div class="hero-unit">
-    <h1>{$this->translate('List of node')}</h1>
+    <h2>{$this->translate('List of nodes')}</h2>
     <p>
         <a href="{$this->url('node', ['action'=>'add'])}" class="btn btn-success">
             {$this->translate('Add new node')}
