@@ -1,12 +1,44 @@
 <?php
 namespace Application\Model;
 
+use Zend\Form\Annotation as Form;
+
 class Job
 {
+    /**
+     * @Form\Required(false)
+     * @Form\Attributes({"type":"hidden"})
+     */
     public $id;
+    /**
+     * @Form\Required(false)
+     * @Form\Attributes({"type":"text"})
+     * @Form\Options({"label":"Description"})
+     * @Form\Filter({"name":"StringTrim"})
+     * @Form\Filter({"name":"StripTags"})
+     */
     public $description;
+    /**
+     * @Form\Required(true)
+     * @Form\Attributes({"type":"text"})
+     * @Form\Options({"label":"Action"})
+     * @Form\Filter({"name":"StringTrim"})
+     * @Form\Filter({"name":"StripTags"})
+     */
     public $action;
+    /**
+     * @Form\Required(true)
+     * @Form\Attributes({"type":"text"})
+     * @Form\Options({"label":"Default Schedule"})
+     * @Form\Filter({"name":"StringTrim"})
+     */
     public $defaultschedule;
+    /**
+     * @Form\Required(true)
+     * @Form\Attributes({"type":"text"})
+     * @Form\Options({"label":"Estimated Duration"})
+     * @Form\Filter({"name":"StringTrim"})
+     */
     public $estimatedduration;
 
     public function exchangeArray($data)

@@ -48,6 +48,7 @@ class NodeController extends AbstractActionController
                 'type'  => 'submit',
                 'value' => 'Add',
                 'id' => 'submitbutton',
+                'class' => 'btn btn-success',
             ),
         ));
         $request = $this->getRequest();
