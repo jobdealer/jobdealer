@@ -4,6 +4,9 @@
         <a href="{$this->url('node', ['action'=>'add'])}" class="btn btn-success">
             {$this->translate('Add new node')}
         </a>
+        <a href="{$this->url('node', ['action'=>'status'])}" class="btn btn-success">
+            {$this->translate('View nodes status')}
+        </a>
     </p>
     <table class="table table-bordered table-hover">
         <tr>
