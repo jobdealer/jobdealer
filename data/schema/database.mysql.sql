@@ -20,3 +20,14 @@ CREATE TABLE node (
   PRIMARY KEY (id),
   key `ipaddr` (`ipaddr`)
 );
+
+
+CREATE TABLE execution (
+  id int(11) NOT NULL auto_increment ,
+  nodeid int(11) not null,
+  jobid int(11) not null,
+  schedule varchar(100) default null,
+  description varchar(255) default null,
+  PRIMARY KEY (id)
+);
+

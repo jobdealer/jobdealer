@@ -16,6 +16,8 @@ use Application\Model\Job;
 use Application\Model\JobTable;
 use Application\Model\Node;
 use Application\Model\NodeTable;
+use Application\Model\Execution;
+use Application\Model\ExecutionTable;
 
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
@@ -70,6 +72,17 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Node());
                     return new TableGateway('node', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Application\Model\ExecutionTable' =>  function($sm) {
+                    $tableGateway = $sm->get('ExecutionTableGateway');
+                    $table = new ExecutionTable($tableGateway);
+                    return $table;
+                },
+                'ExecutionTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Execution());
+                    return new TableGateway('execution', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

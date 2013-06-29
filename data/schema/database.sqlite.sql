@@ -18,3 +18,12 @@ CREATE TABLE node (
 );
 
 CREATE INDEX file_hash_list_ipaddr on node (ipaddr);
+
+DROP TABLE execution;
+CREATE TABLE execution (
+  id integer PRIMARY KEY NOT NULL,
+  nodeid int not null,
+  jobid int not null,
+  schedule char(15) NOT NULL,
+  description text default null
+);
