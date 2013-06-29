@@ -38,6 +38,17 @@ class Job
      * @Form\Attributes({"type":"text"})
      * @Form\Options({"label":"Estimated Duration"})
      * @Form\Filter({"name":"StringTrim"})
+     * @Form\Validator({
+     *  "name":"regex",
+     *  "options": {
+     *      "pattern": "/^\d+:\d{2}:\d{2}$/",
+     *      "messages": {
+     *          "regexInvalid":"Regex is invalid, Booo!",
+     *          "regexNotMatch": "Input doesn't match, bleeeeh!",
+     *          "regexErrorous": "Internal error, i'm like wtf!"
+     *      }
+     *  }
+     * })
      */
     public $estimatedduration;
 
@@ -50,4 +61,8 @@ class Job
         $this->estimatedduration  = (isset($data['estimatedduration'])) ? $data['estimatedduration'] : null;
     }
 
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
 }

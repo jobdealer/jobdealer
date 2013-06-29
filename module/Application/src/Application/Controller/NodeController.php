@@ -73,7 +73,6 @@ class NodeController extends AbstractActionController
                 return $this->redirect()->toRoute('node');
             }
         }
-
         $form->setAttribute('action', $this->url()->fromRoute('node').'/add');
 
         return array('form' => $form);

@@ -53,4 +53,9 @@ class Node
         $this->lastseen  = (isset($data['lastseen'])) ? $data['lastseen'] : null;
     }
 
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
 }

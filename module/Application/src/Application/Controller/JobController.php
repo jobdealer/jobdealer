@@ -35,14 +35,7 @@ class JobController extends AbstractActionController
         }
 
     }
-    private function getJobTable()
-    {
-        if (!$this->jobTable) {
-            $sm = $this->getServiceLocator();
-            $this->jobTable = $sm->get('Application\Model\JobTable');
-        }
-        return $this->jobTable;
-    }
+
     public function addAction(){
         $builder = new AnnotationBuilder();
         $form = $builder->createForm(new Job());
@@ -68,16 +61,63 @@ class JobController extends AbstractActionController
                     $pdoException = $e->getPrevious();
                     var_dump($pdoException);
                 }
-
-
                 // Redirect to list of job
                 return $this->redirect()->toRoute('job');
             }
         }
-        #$form->setAttribute('action', $this->url('job', array('action' => 'add')));
-
+        $form->setAttribute('action', $this->url()->fromRoute('job').'/add');
         return array('form' => $form);
     }
+
+    public function editAction(){
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('job', array('action' => 'add'));
+        }
+        try {
+            $job = $this->getJobTable()->getJob($id);
+        } catch (\Exception $ex) {
+            return $this->redirect()->toRoute('job', array('action' => 'index'));
+        }
+
+        $builder = new AnnotationBuilder();
+        $form = $builder->createForm(new Job());
+        $form->bind($job);
+        //$form->setAttribute('action', $this->url()->fromRoute('job').'/edit');
+        $form->add(
+            array(
+                'name' => 'submit',
+                'attributes' => array(
+                    'type'  => 'submit',
+                    'value' => 'Edit',
+                    'id' => 'submitbutton',
+                    'class' => 'btn btn-success',
+                ),
+            )
+        );
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            //$form->setInputFilter($job->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                try {
+                    $this->getJobTable()->saveJob($job);
+                    return $this->redirect()->toRoute('job');
+                } catch (\Exception $e) {
+                    $pdoException = $e->getPrevious();
+                    var_dump($pdoException);
+                }
+            }
+        }
+
+        return array(
+            'id' => $id,
+            'form' => $form,
+        );
+    }
+
 
     public function deleteAction()
     {
@@ -104,4 +144,14 @@ class JobController extends AbstractActionController
             'job' => $this->getJobTable()->getJob($id)
         );
     }
+
+    private function getJobTable()
+    {
+        if (!$this->jobTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobTable = $sm->get('Application\Model\JobTable');
+        }
+        return $this->jobTable;
+    }
+
 }
