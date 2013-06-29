@@ -20,7 +20,11 @@
         {foreach $nodes as $node}
             <tr>
                 <td>{$this->escapeHtml($node->id)}</td>
-                <td>{$this->escapeHtml($node->nodename)}</td>
+                <td>
+                    <a href="{$this->url('node', ['action' => 'view', 'id' => $node->id])}">
+                        {$this->escapeHtml($node->nodename)}
+                    </a>
+                </td>
                 <td>{$this->escapeHtml($node->ipaddr)}</td>
                 <td>{$this->escapeHtml($node->description)}</td>
                 <td>{$this->escapeHtml($node->lastseen)}</td>
@@ -29,6 +33,8 @@
                         href="{$this->url('node', ['action'=>'edit', 'id' => $node->id])}"}
                     {icon action='delete' title="{$this->translate('Delete')}"
                         href="{$this->url('node', ['action'=>'delete', 'id' => $node->id])}"}
+                    {icon action='detail' title="{$this->translate('Detail')}"
+                        href="{$this->url('node', ['action'=>'view', 'id' => $node->id])}"}
                 </td>
             </tr>
             {foreachelse}
