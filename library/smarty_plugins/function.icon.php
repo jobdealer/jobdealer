@@ -12,6 +12,9 @@ function smarty_function_icon($params, $content, $smarty, &$repeat = false)
         case 'delete':
             $sLink .= "icon cross";
             break;
+        case 'detail':
+            $sLink .= "icon information";
+            break;
     }
 
     $sLink .= '" title="'.$params['title'].'"/>';
