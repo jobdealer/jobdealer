@@ -13,10 +13,13 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Form\Annotation\AnnotationBuilder;
 use Application\Model\Node;
+use Application\Model\Execution;
 
 class NodeController extends AbstractActionController
 {
     protected $nodeTable;
+    protected $executionTable;
+    protected $jobTable;
 
     public function indexAction()
     {
@@ -70,7 +73,8 @@ class NodeController extends AbstractActionController
                 return $this->redirect()->toRoute('node');
             }
         }
-        #$form->setAttribute('action', $this->url('node', array('action' => 'add')));
+
+        $form->setAttribute('action', $this->url()->fromRoute('node').'/add');
 
         return array('form' => $form);
     }
@@ -101,6 +105,24 @@ class NodeController extends AbstractActionController
         );
     }
 
+    public function viewAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $oNodeTable = $this->getNodeTable()->getNode($id);
+
+        $aExecutionTable = $this->getExecutionTable()->getAllExecutionForNode($id);
+        $aExecution = array();
+        foreach ($aExecutionTable as $oExecutionTable) {
+            $oExecutionTable->job = $this->getJobTable()->getJob($oExecutionTable->jobid);
+            $aExecution[] = $oExecutionTable;
+        }
+        return new ViewModel(
+            array(
+                'oNode' => $oNodeTable,
+                'aExecution' => $aExecution,
+            )
+        );
+    }
+
     private function getNodeTable()
     {
         if (!$this->nodeTable) {
@@ -108,5 +130,23 @@ class NodeController extends AbstractActionController
             $this->nodeTable = $sm->get('Application\Model\NodeTable');
         }
         return $this->nodeTable;
+    }
+
+    private function getJobTable()
+    {
+        if (!$this->jobTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobTable = $sm->get('Application\Model\JobTable');
+        }
+        return $this->jobTable;
+    }
+
+    private function getExecutionTable()
+    {
+        if (!$this->executionTable) {
+            $sm = $this->getServiceLocator();
+            $this->executionTable = $sm->get('Application\Model\ExecutionTable');
+        }
+        return $this->executionTable;
     }
 }
