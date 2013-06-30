@@ -11,23 +11,39 @@ namespace Api\Controller;
 
 use Zend\Mvc\Controller\AbstractRestfulController;
 
-#use Album\Model\Album;
-#use Album\Form\AlbumForm;
-#use Album\Model\AlbumTable;
+use Application\Model\Node;
+use Application\Model\Job;
+use Application\Model\Execution;
 use Zend\View\Model\JsonModel;
 
 
 class ApiController extends AbstractRestfulController
 {
+    protected $nodeTable;
+    protected $jobTable;
+    protected $executionTable;
+
     public function getList()
     {
         $result = new JsonModel(array('list' => 'success'));
         return $result;
     }
 
-    public function get($id)
+    public function get($action)
     {
-        $result = new JsonModel(array('get' => 'success', 'id' => $id));
+        switch($action) {
+            case 'getConfig':
+                $iNodeId = $this->getNodeTable()->getNodeIdFromIpaddr($_SERVER['REMOTE_ADDR']);
+
+                $aExecutionTable = $this->getExecutionTable()->getAllExecutionForNode($iNodeId);
+                foreach ($aExecutionTable as $oExecutionTable) {
+                    $aExecutionJob[] = $this->getJobTable()->getJob($oExecutionTable->jobid);
+                }
+                $result = new JsonModel(array('get' => 'success', 'action' => $aExecutionJob));
+                break;
+            default:
+                throw new \Exception("Action $action doesn't exist");
+        }
         $result->setTerminal(true);
         return $result;
     }
@@ -52,4 +68,32 @@ class ApiController extends AbstractRestfulController
         $result->setTerminal(true);
         return $result;
     }
+
+    private function getNodeTable()
+    {
+        if (!$this->nodeTable) {
+            $sm = $this->getServiceLocator();
+            $this->nodeTable = $sm->get('Application\Model\NodeTable');
+        }
+        return $this->nodeTable;
+    }
+
+    private function getExecutionTable()
+    {
+        if (!$this->executionTable) {
+            $sm = $this->getServiceLocator();
+            $this->executionTable = $sm->get('Application\Model\ExecutionTable');
+        }
+        return $this->executionTable;
+    }
+
+    private function getJobTable()
+    {
+        if (!$this->jobTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobTable = $sm->get('Application\Model\JobTable');
+        }
+        return $this->jobTable;
+    }
+
 }

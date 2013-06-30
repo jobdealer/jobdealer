@@ -28,7 +28,16 @@ class NodeTable
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
+    public function getNodeIdFromIpaddr ($ipaddr)
+    {
+        $rowset = $this->tableGateway->select(array('ipaddr' => $ipaddr));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find node with ipaddr $ipaddr");
+        }
+        return $row->id;
 
+    }
     public function getNode($id)
     {
         $id  = (int) $id;

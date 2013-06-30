@@ -13,7 +13,7 @@ return array(
                 'options' => array(
                     'route'    => '/api[/:id]',
                     'constraints' => array(
-                        'id'     => '[0-9]+',
+                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
                     'defaults' => array(
                         'controller' => 'Api\Controller\Api',
