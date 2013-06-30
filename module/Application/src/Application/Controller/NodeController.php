@@ -78,6 +78,54 @@ class NodeController extends AbstractActionController
         return array('form' => $form);
     }
 
+    public function editAction(){
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('node', array('action' => 'add'));
+        }
+        try {
+            $node = $this->getNodeTable()->getNode($id);
+        } catch (\Exception $ex) {
+            return $this->redirect()->toRoute('node', array('action' => 'index'));
+        }
+
+        $builder = new AnnotationBuilder();
+        $form = $builder->createForm(new Node());
+        $form->bind($node);
+        //$form->setAttribute('action', $this->url()->fromRoute('node').'/edit');
+        $form->add(
+            array(
+                 'name' => 'submit',
+                 'attributes' => array(
+                     'type'  => 'submit',
+                     'value' => 'Edit',
+                     'id' => 'submitbutton',
+                     'class' => 'btn btn-success',
+                 ),
+            )
+        );
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                try {
+                    $this->getNodeTable()->saveNode($node);
+                    return $this->redirect()->toRoute('node');
+                } catch (\Exception $e) {
+                    $pdoException = $e->getPrevious();
+                    var_dump($pdoException);
+                }
+            }
+        }
+
+        return array(
+            'id' => $id,
+            'form' => $form,
+        );
+    }
+
+
     public function deleteAction()
     {
         $id = (int) $this->params()->fromRoute('id', 0);
