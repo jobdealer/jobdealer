@@ -22,8 +22,15 @@ Tools to manage tasks on different server.
     GRANT ALL PRIVILEGES ON jobdealer.* TO 'RW_jobdealer'@'localhost';
     " | mysql -u root -p
     
-    mysql -u root -p jobdealer < GIT_CLONE/data/schema/database.mysql.sql
-    
+    mysql -u root -p jobdealer < /var/www/jobdealer/data/schema/database.mysql.sql
+
+### Configure your's serveur type, address and db name :
+        cp /var/www/jobdealer/config/autoload/local.php.dist config/autoload/local.php
+        vi /var/www/jobdealer/config/autoload/local.php
+
+### Configure user and password DB in:
+        vi /var/www/jobdealer/config/autoload/global.php
+
 ### Create VHOST (example with Apache and FCGID)
     <VirtualHost *:80>
        ServerName jobdealer.my.domain
