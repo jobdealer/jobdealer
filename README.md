@@ -47,3 +47,38 @@ Tools to manage tasks on different server.
           Options +ExecCGI
        </Location>
     </VirtualHost>
+### Create VHOST (example with Nginx and php5-fpm)
+
+    server {
+       listen   80; ## listen for ipv4; this line is default and implied
+    
+       root /yourdocumentrooth/public/;
+       index index.html index.php;
+       server_name myjobdealer.local;
+    
+       location / {
+          index index.php;
+       }
+    
+       if (!-e $request_filename) {
+          rewrite ^.*$ /index.php last;
+       }
+    
+       location ~ \.php$ {
+          fastcgi_split_path_info ^(.+\.php)(/.+)$;
+          # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+    
+          # With php5-cgi alone:
+          #fastcgi_pass 127.0.0.1:9001;
+          # With php5-fpm:
+          fastcgi_pass unix:/var/run/web.sock;
+          fastcgi_index index.php;
+          include fastcgi_params;
+       }
+    
+       # deny access to .htaccess files, if Apache's document root
+       # concurs with nginx's one
+       location ~ /\.ht {
+          deny all;
+       }
+    }
