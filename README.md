@@ -15,14 +15,16 @@ Tools to manage tasks on different server.
     HTTPS_PROXY_REQUEST_FULLURI=false php composer.phar install
     chown  HTTP_USER:HTTP_USER -R /var/www/jobdealer
 
-### Create database and schema
+### Create database and schema (example with MySQL)
     echo "
     CREATE DATABASE jobdealer;
     CREATE USER 'RW_jobdealer'@'localhost' IDENTIFIED BY 'MY_PASSWORD';
     GRANT ALL PRIVILEGES ON jobdealer.* TO 'RW_jobdealer'@'localhost';
-    " | mysql -u root -p jobdealer < GIT_CLONE/data/schema/database.mysql.sql
+    " | mysql -u root -p
     
-### Create VHOST (exemple with Apache and FCGID)
+    mysql -u root -p jobdealer < GIT_CLONE/data/schema/database.mysql.sql
+    
+### Create VHOST (example with Apache and FCGID)
     <VirtualHost *:80>
        ServerName jobdealer.my.domain
        Customlog "| /usr/local/bin/logger -p local3.info" combinedvhost
