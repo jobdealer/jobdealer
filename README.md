@@ -25,11 +25,11 @@ Tools to manage tasks on different server.
     mysql -u root -p jobdealer < /var/www/jobdealer/data/schema/database.mysql.sql
 
 ### Configure your's serveur type, address and db name :
-        cp /var/www/jobdealer/config/autoload/local.php.dist config/autoload/local.php
-        vi /var/www/jobdealer/config/autoload/local.php
+    cp /var/www/jobdealer/config/autoload/local.php.dist config/autoload/local.php
+    vi /var/www/jobdealer/config/autoload/local.php
 
 ### Configure user and password DB in:
-        vi /var/www/jobdealer/config/autoload/global.php
+    vi /var/www/jobdealer/config/autoload/global.php
 
 ### Create VHOST (example with Apache and FCGID)
     <VirtualHost *:80>
