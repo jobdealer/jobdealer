@@ -1,7 +1,6 @@
-drop database jobdealer;
-create database jobdealer;
-use jobdealer;
+ALTER DATABASE DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
+DROP TABLE IF EXISTS `job`;
 CREATE TABLE job (
   id int(11) NOT NULL auto_increment,
   description varchar(255) default null,
@@ -11,6 +10,7 @@ CREATE TABLE job (
   PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS `node`;
 CREATE TABLE node (
   id int(11) NOT NULL auto_increment,
   nodename varchar(255) default null,
@@ -21,7 +21,7 @@ CREATE TABLE node (
   key `ipaddr` (`ipaddr`)
 );
 
-
+DROP TABLE IF EXISTS `execution`;
 CREATE TABLE execution (
   id int(11) NOT NULL auto_increment ,
   nodeid int(11) not null,
@@ -30,4 +30,3 @@ CREATE TABLE execution (
   description varchar(255) default null,
   PRIMARY KEY (id)
 );
-
