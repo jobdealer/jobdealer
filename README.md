@@ -8,9 +8,13 @@ Tools to manage tasks on different server.
 
 ### Clone
     cd /var/www
-    git clone https://github.com/changi67/jobdealer
+    git clone https://github.com/jobdealer/jobdealer
 
-### Initialize
+### Initialize without proxy
+    php composer.phar install
+    chown  HTTP_USER:HTTP_USER -R /var/www/jobdealer
+
+### Initialize behind proxy
     HTTPS_PROXY_REQUEST_FULLURI=false php composer.phar self-update
     HTTPS_PROXY_REQUEST_FULLURI=false php composer.phar install
     chown  HTTP_USER:HTTP_USER -R /var/www/jobdealer
@@ -24,11 +28,11 @@ Tools to manage tasks on different server.
     
     mysql -u root -p jobdealer < /var/www/jobdealer/data/schema/database.mysql.sql
 
-### Configure your's serveur type, address and db name :
+### Configure your serveur type (mysql or sqlite), address and db name :
     cp /var/www/jobdealer/config/autoload/local.php.dist config/autoload/local.php
     vi /var/www/jobdealer/config/autoload/local.php
 
-### Configure user and password DB in:
+### Configure user and password DB in (only for MySQL):
     vi /var/www/jobdealer/config/autoload/global.php
 
 ### Create VHOST (example with Apache and FCGID)
@@ -38,17 +42,14 @@ Tools to manage tasks on different server.
        ErrorLog "| /usr/local/bin/logger -t jobdealer.my.domain -p local2.info "
        DocumentRoot /var/www/jobdealer/public
     
-       RewriteEngine On
-       RewriteRule ^/([a-z0-9_\-]+)/?$  index.php?project=$1   [QSA,NC,L]
-    
        <Location />
           AddHandler fcgid-script .php
           FCGIWrapper /usr/bin/php5-cgi .php
           Options +ExecCGI
        </Location>
     </VirtualHost>
+    
 ### Create VHOST (example with Nginx and php5-fpm)
-
     server {
        listen   80; ## listen for ipv4; this line is default and implied
     
