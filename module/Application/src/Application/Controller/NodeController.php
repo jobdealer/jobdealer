@@ -37,6 +37,7 @@ class NodeController extends AbstractActionController
             var_dump($pdoException);
         }
     }
+
     public function statusAction()
     {
         return new ViewModel();
@@ -156,6 +157,8 @@ class NodeController extends AbstractActionController
         $id = (int) $this->params()->fromRoute('id', 0);
         $oNodeTable = $this->getNodeTable()->getNode($id);
 
+        $aJobs = $this->getJobTable()->fetchAll();
+
         $aExecutionTable = $this->getExecutionTable()->getAllExecutionForNode($id);
         $aExecution = array();
         foreach ($aExecutionTable as $oExecutionTable) {
@@ -166,6 +169,7 @@ class NodeController extends AbstractActionController
             array(
                 'oNode' => $oNodeTable,
                 'aExecution' => $aExecution,
+                'aJobs' => $aJobs
             )
         );
     }
