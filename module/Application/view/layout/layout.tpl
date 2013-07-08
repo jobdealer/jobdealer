@@ -11,15 +11,17 @@
         "`$basePath`/images/favicon.ico"])}
         <!-- Le styles -->
         <link rel="stylesheet" type="text/css" href="{$basePath}/css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" type="text/css" href="{$basePath}/css/style.css">
         <link rel="stylesheet" type="text/css" href="{$basePath}/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{$basePath}/css/jquery-ui/jquery-ui.1.10.3.css">
+        <link rel="stylesheet" type="text/css" href="{$basePath}/css/style.css">
+
         {$this->headLink()}
 
         <!-- Scripts -->
         <script type="text/javascript" charset="utf-8" src="{$basePath}/js/jquery-1.10.1.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="{$basePath}/js/html5.js"></script>
         <script type="text/javascript" charset="utf-8" src="{$basePath}/js/bootstrap.min.js"></script>
-
+        <script type="text/javascript" charset="utf-8" src="{$basePath}/js/jquery-ui-1.10.3.min.js"></script>
         {$this->headScript()}
     </head>
     <body>
