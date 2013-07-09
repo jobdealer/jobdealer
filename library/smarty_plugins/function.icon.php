@@ -1,6 +1,6 @@
 <?php
 
-function smarty_function_icon($params, $content, $smarty, &$repeat = false)
+function smarty_function_icon($params, $smarty, &$repeat = false)
 {
     $sLink  = '<a href="'.$params['href'].'">';
     $sLink .= '<span class="';
