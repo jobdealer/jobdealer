@@ -33,6 +33,7 @@ class ApiController extends AbstractRestfulController
     {
         switch($action) {
             case 'getConfig':
+                $aExecutionJob = array();
                 $iNodeId = $this->getNodeTable()->getNodeIdFromIpaddr($_SERVER['REMOTE_ADDR']);
 
                 $aExecutionTable = $this->getExecutionTable()->getAllExecutionForNode($iNodeId);
