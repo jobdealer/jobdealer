@@ -47,32 +47,32 @@
         </div>
     </div>
     <div id="add-job-dialog" title="Add Job">
-        <table class="table table-bordered table-hover">
-            <tr>
-                <th>#</th>
-                <th>{$this->translate('Description')}</th>
-                <th>{$this->translate('Action')}</th>
-                <th>{$this->translate('Default Schedule')}</th>
-                <th>{$this->translate('Estimated Duration')}</th>
-                <th>{$this->translate('Operation')}</th>
-            </tr>
-            {foreach $aJobs as $job}
+        <table class="table table-bordered table-hover" id="add-job-table">
+            <thead>
                 <tr>
-                    <td>{$this->escapeHtml($job->id)}</td>
-                    <td>{$this->escapeHtml($job->description)}</td>
-                    <td>{$this->escapeHtml($job->action)}</td>
-                    <td>{$this->escapeHtml($job->defaultschedule)}</td>
-                    <td>{$this->escapeHtml($job->estimatedduration)}</td>
-                    <td>
-                        {icon action='edit' title="{$this->translate('Edit')}"
-                        href="{$this->url('job', ['action'=>'edit', 'id' => $job->id])}"}
-                        {icon action='delete' title="{$this->translate('Delete')}"
-                        href="{$this->url('job', ['action'=>'delete', 'id' => $job->id])}"}
-                    </td>
+                    <th>{$this->translate('Description')}</th>
+                    <th>{$this->translate('Action')}</th>
+                    <th>{$this->translate('Default Schedule')}</th>
+                    <th>{$this->translate('Estimated Duration')}</th>
+                    <th>{$this->translate('Action')}</th>
                 </tr>
-                {foreachelse}
-                <tr class="info"><td colspan="6">{$this->translate("Cant't find any job !")}</td></tr>
-            {/foreach}
+            </thead>
+            <tbody>
+                {foreach $aJobs as $job}
+                    <tr>
+                        <td>{$this->escapeHtml($job->description)}</td>
+                        <td>{$this->escapeHtml($job->action)}</td>
+                        <td>{$this->escapeHtml($job->defaultschedule)}</td>
+                        <td>{$this->escapeHtml($job->estimatedduration)}</td>
+                        <td>
+                            {icon action='add' title="{$this->translate('Add')}" href="#"}
+                            {icon action='clone' title="{$this->translate('Clone')}" href="#"}
+                        </td>
+                    </tr>
+                    {foreachelse}
+                    <tr class="info"><td colspan="6">{$this->translate("Cant't find any job !")}</td></tr>
+                {/foreach}
+            </tbody>
         </table>
     </div>
 
@@ -81,15 +81,24 @@
         jQuery(
             function($) {
                 $('#jobstab').tab();
+                $('#add-job-table').dataTable(
+                    {
+                        "sDom": "<'row'<'span4'l><'floatright'f>r>t<'row'<'span7'i><'floatright'p>>",
+                        "sPaginationType": "bootstrap"
+                    }
+                );
                 $('#add-job').on("click", function(){
                         $('#add-job-dialog').dialog('open');
                     }
                 );
                 $('#add-job-dialog').dialog({
-                    autoOpen: false, height: 300, width: 700, modal: true, closeOnEscape: true,
+                    autoOpen: false, height: 400, width: 800, modal: true, closeOnEscape: true,
                     buttons:{
-                        'Cancel': function() {
-                            $(this).html('');
+                        'Add new job': function() {
+                            window.location('#');
+                        },
+                        'Done': function() {
+                            console.log('Done');
                             $(this).dialog('close');
                         }
                     }

@@ -154,6 +154,11 @@ class NodeController extends AbstractActionController
     }
 
     public function viewAction() {
+        $this->getServiceLocator()
+            ->get('viewhelpermanager')
+            ->get('HeadLink')
+            ->appendStylesheet('/css/famfamfam.css');
+
         $id = (int) $this->params()->fromRoute('id', 0);
         $oNodeTable = $this->getNodeTable()->getNode($id);
 

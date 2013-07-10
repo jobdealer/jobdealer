@@ -1,37 +1,27 @@
-body {
-    padding-top: 60px;
-    padding-bottom: 40px;
+/* Placement des éléments de datatables */
+div.dataTables_length label {
+    width: 460px;
+    float: left;
+    text-align: left;
 }
 
-.zf-green {
-    color: #68b604;
+div.dataTables_length select {
+    width: 75px;
 }
 
-.btn-success {
-  background-color: #57a900;
-  background-image: -moz-linear-gradient(top, #70d900, #57a900);
-  background-image: -ms-linear-gradient(top, #70d900, #57a900);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#70d900), to(#57a900));
-  background-image: -webkit-linear-gradient(top, #70d900, #57a900);
-  background-image: -o-linear-gradient(top, #70d900, #57a900);
-  background-image: linear-gradient(top, #70d900, #57a900);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#70d900', endColorstr='#57a900', GradientType=0);
+div.dataTables_filter label {
+    float: right;
 }
 
-.btn-success:hover,
-.btn-success:active,
-.btn-success.active,
-.btn-success.disabled,
-.btn-success[disabled] {
-  background-color: #57a900;
+div.dataTables_info {
+    padding-top: 8px;
 }
 
-.btn-success:active, .btn-success.active {
-  background-color: #57a900;
+div.dataTables_paginate {
+    float: right;
+    margin: 0;
 }
 
-div.container a.brand {
-    background: url("../img/zf2-logo.png") no-repeat scroll 0 10px transparent;
-    margin-left: 0;
-    padding: 8px 20px 12px 40px;
+.ui-widget {
+    font-size: 1em;
 }

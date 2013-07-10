@@ -15,6 +15,12 @@ function smarty_function_icon($params, $smarty, &$repeat = false)
         case 'detail':
             $sLink .= "icon information";
             break;
+        case 'add':
+            $sLink .= "icon add";
+            break;
+        case 'clone':
+            $sLink .= "icon page-lightning";
+            break;
     }
 
     $sLink .= '" title="'.$params['title'].'"/>';

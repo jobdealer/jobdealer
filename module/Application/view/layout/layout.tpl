@@ -22,6 +22,8 @@
         <script type="text/javascript" charset="utf-8" src="{$basePath}/js/html5.js"></script>
         <script type="text/javascript" charset="utf-8" src="{$basePath}/js/bootstrap.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="{$basePath}/js/jquery-ui-1.10.3.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{$basePath}/js/datatables/jquery.dataTables.1.9.4.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{$basePath}/js/datatables/paging.js"></script>
         {$this->headScript()}
     </head>
     <body>
