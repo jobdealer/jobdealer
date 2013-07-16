@@ -54,10 +54,11 @@ return array(
             'node' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/node[/:action][/:id]',
+                    'route'    => '/node[/:action][/:id][/:job]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
+                        'job' => '[0-9]+',
                     ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',

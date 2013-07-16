@@ -42,8 +42,8 @@ class ExecutionTable
     public function saveExecution(Execution $execution)
     {
         $data = array(
-            'node' => $execution->nodeid,
-            'job'  => $execution->jobid,
+            'nodeid' => $execution->nodeid,
+            'jobid'  => $execution->jobid,
             'schedule' => $execution->schedule,
             'description' => $execution->description,
         );

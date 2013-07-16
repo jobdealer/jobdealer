@@ -19,7 +19,7 @@
             <button id="add-job" class="btn btn-primary">{$this->translate("Add jobs")}</button>
             <table class="table table-bordered table-hover">
                 <tr>
-                    <th>#</th>
+                    <!--<th>#</th>-->
                     <th>{$this->translate('Job')}</th>
                     <th>{$this->translate('Schedule')}</th>
                     <th>{$this->translate('Description')}</th>
@@ -27,7 +27,7 @@
                 </tr>
                 {foreach $aExecution as $oExecution}
                     <tr>
-                        <td>{$this->escapeHtml($oExecution->id)}</td>
+                        <!--<td>{$this->escapeHtml($oExecution->id)}</td>-->
                         <td>{$this->escapeHtml($oExecution->job->description)}</td>
                         <td>{$this->escapeHtml($oExecution->schedule)}</td>
                         <td>{$this->escapeHtml($oExecution->description)}</td>
@@ -35,7 +35,7 @@
                             {icon action='edit' title="{$this->translate('Edit')}"
                             href="{$this->url('node', ['action'=>'edit', 'id' => $node->id])}"}
                             {icon action='delete' title="{$this->translate('Delete')}"
-                            href="{$this->url('node', ['action'=>'delete', 'id' => $node->id])}"}
+                            href="{$this->url('node', ['action'=>'unlink', 'id' => $oNode->id, 'job' => $oExecution->id])}"}
                         </td>
                     </tr>
                     {foreachelse}
@@ -50,6 +50,7 @@
         <table class="table table-bordered table-hover" id="add-job-table">
             <thead>
                 <tr>
+                    <!--<th>{$this->translate('Id')}</th>-->
                     <th>{$this->translate('Description')}</th>
                     <th>{$this->translate('Action')}</th>
                     <th>{$this->translate('Default Schedule')}</th>
@@ -60,12 +61,14 @@
             <tbody>
                 {foreach $aJobs as $job}
                     <tr>
+                        <!--<td>{$this->escapeHtml($job->id)}</td>-->
                         <td>{$this->escapeHtml($job->description)}</td>
                         <td>{$this->escapeHtml($job->action)}</td>
                         <td>{$this->escapeHtml($job->defaultschedule)}</td>
                         <td>{$this->escapeHtml($job->estimatedduration)}</td>
                         <td>
-                            {icon action='add' title="{$this->translate('Add')}" href="#"}
+                            {icon action='add' title="{$this->translate('Add')}"
+                                href="{$this->url('node', ['action'=>'link', 'id' => $oNode->id, 'job' => $job->id])}"}
                             {icon action='clone' title="{$this->translate('Clone')}" href="#"}
                         </td>
                     </tr>

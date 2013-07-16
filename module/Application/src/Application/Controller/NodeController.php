@@ -153,6 +153,36 @@ class NodeController extends AbstractActionController
         );
     }
 
+    public function linkAction() {
+        $iNodeId = (int) $this->params()->fromRoute('id', 0);
+        $iJobId = (int) $this->params()->fromRoute('job', 0);
+
+        $oExecution = new Execution();
+        $aExecution = array(
+            "nodeid" => $iNodeId,
+            "jobid" => $iJobId,
+        );
+
+        $oExecution->exchangeArray($aExecution);
+        try {
+            $this->getExecutionTable()->saveExecution($oExecution);
+        } catch (\Exception $e) {
+            $pdoException = $e->getPrevious();
+            var_dump($pdoException);
+        }
+    }
+
+    public function unlinkAction() {
+        $iNodeId = (int) $this->params()->fromRoute('id', 0);
+        $iExecutionId = (int) $this->params()->fromRoute('job', 0);
+        $this->getExecutionTable()->deleteExecution($iExecutionId);
+
+        // Redirect to node detail
+        return $this->redirect()->toRoute('node', array('action' => 'view', 'id' => $iNodeId));
+    }
+
+
+
     public function viewAction() {
         $this->getServiceLocator()
             ->get('viewhelpermanager')
