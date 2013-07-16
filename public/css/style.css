@@ -1,3 +1,8 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
 /* Placement des éléments de datatables */
 div.dataTables_length label {
     width: 460px;
