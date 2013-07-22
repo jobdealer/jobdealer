@@ -15,7 +15,7 @@ use Zend\Form\Annotation\AnnotationBuilder;
 use Application\Model\Node;
 use Application\Model\Execution;
 
-class NodeController extends AbstractActionController
+class ExecutionController extends AbstractActionController
 {
     protected $nodeTable;
     protected $executionTable;
@@ -38,61 +38,20 @@ class NodeController extends AbstractActionController
         }
     }
 
-    public function statusAction()
-    {
-        return new ViewModel();
-    }
-
-    public function addAction(){
-        $builder = new AnnotationBuilder();
-        $form = $builder->createForm(new Node());
-        $form->add(array(
-            'name' => 'submit',
-            'attributes' => array(
-                'type'  => 'submit',
-                'value' => 'Add',
-                'id' => 'submitbutton',
-                'class' => 'btn btn-success',
-            ),
-        ));
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $node = new Node();
-            $form->setData($request->getPost());
-
-            if ($form->isValid()) {
-                $node->exchangeArray($form->getData());
-                try {
-                    $this->getNodeTable()->saveNode($node);
-                } catch (\Exception $e) {
-                    $pdoException = $e->getPrevious();
-                    var_dump($pdoException);
-                }
-
-
-                // Redirect to list of node
-                return $this->redirect()->toRoute('node');
-            }
-        }
-        $form->setAttribute('action', $this->url()->fromRoute('node').'/add');
-
-        return array('form' => $form);
-    }
-
     public function editAction(){
-        $id = (int) $this->params()->fromRoute('id', 0);
-        if (!$id) {
-            return $this->redirect()->toRoute('node', array('action' => 'add'));
+        $iExecutionId = (int) $this->params()->fromRoute('id', 0);
+        if (!$iExecutionId) {
+            return $this->redirect()->toRoute('node');
         }
         try {
-            $node = $this->getNodeTable()->getNode($id);
+            $oExecution = $this->getExecutionTable()->getExecution($iExecutionId);
         } catch (\Exception $ex) {
-            return $this->redirect()->toRoute('node', array('action' => 'index'));
+            return $this->redirect()->toRoute('node');
         }
 
         $builder = new AnnotationBuilder();
-        $form = $builder->createForm(new Node());
-        $form->bind($node);
+        $form = $builder->createForm(new Execution());
+        $form->bind($oExecution);
         //$form->setAttribute('action', $this->url()->fromRoute('node').'/edit');
         $form->add(
             array(
@@ -106,52 +65,53 @@ class NodeController extends AbstractActionController
             )
         );
 
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $form->setData($request->getPost());
-            if ($form->isValid()) {
-                try {
-                    $this->getNodeTable()->saveNode($node);
-                    return $this->redirect()->toRoute('node');
-                } catch (\Exception $e) {
-                    $pdoException = $e->getPrevious();
-                    var_dump($pdoException);
-                }
-            }
-        }
+        #$request = $this->getRequest();
+        #if ($request->isPost()) {
+        #    $form->setData($request->getPost());
+        #    if ($form->isValid()) {
+        #        try {
+        #            $this->getNodeTable()->saveNode($node);
+        #            return $this->redirect()->toRoute('node');
+        #        } catch (\Exception $e) {
+        #            $pdoException = $e->getPrevious();
+        #            var_dump($pdoException);
+        #        }
+        #    }
+        #}
 
         return array(
-            'id' => $id,
+            'id' => $iExecutionId,
             'form' => $form,
         );
     }
 
+    public function linkAction() {
+        $iNodeId = (int) $this->params()->fromRoute('id', 0);
+        $iJobId = (int) $this->params()->fromRoute('job', 0);
 
-    public function deleteAction()
-    {
-        $id = (int) $this->params()->fromRoute('id', 0);
-        if (!$id) {
-            return $this->redirect()->toRoute('node');
-        }
-
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $del = $request->getPost('del', 'No');
-
-            if ($del == 'Yes') {
-                $id = (int) $request->getPost('id');
-                $this->getNodeTable()->deleteNode($id);
-            }
-
-            // Redirect to list of nodes
-            return $this->redirect()->toRoute('node');
-        }
-
-        return array(
-            'id'    => $id,
-            'node' => $this->getNodeTable()->getNode($id)
+        $oExecution = new Execution();
+        $aExecution = array(
+            "nodeid" => $iNodeId,
+            "jobid" => $iJobId,
         );
+
+        $oExecution->exchangeArray($aExecution);
+        try {
+            $this->getExecutionTable()->saveExecution($oExecution);
+        } catch (\Exception $e) {
+            $pdoException = $e->getPrevious();
+            var_dump($pdoException);
+        }
     }
+
+    public function deleteAction() {
+        $iExecutionId = (int) $this->params()->fromRoute('id', 0);
+        $this->getExecutionTable()->deleteExecution($iExecutionId);
+        // Redirect to node detail
+        //return $this->redirect()->toRoute('node');
+    }
+
+
 
     public function viewAction() {
         $this->getServiceLocator()

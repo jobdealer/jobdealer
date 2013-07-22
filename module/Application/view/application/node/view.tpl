@@ -33,9 +33,9 @@
                         <td>{$this->escapeHtml($oExecution->description)}</td>
                         <td>
                             {icon action='edit' title="{$this->translate('Edit')}"
-                            href="{$this->url('node', ['action'=>'edit', 'id' => $node->id])}"}
+                            href="{$this->url('execution', ['action'=>'edit', 'id' => $oExecution->id])}"}
                             {icon action='delete' title="{$this->translate('Delete')}"
-                            href="{$this->url('node', ['action'=>'unlink', 'id' => $oNode->id, 'job' => $oExecution->id])}"}
+                            href="{$this->url('execution', ['action'=>'delete', 'id' => $oExecution->id])}"}
                         </td>
                     </tr>
                     {foreachelse}

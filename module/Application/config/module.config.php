@@ -83,6 +83,22 @@ return array(
                     ),
                 ),
             ),
+            'execution' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/execution[/:action][/:id][/:job]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                        'job' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Execution',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
             'workflow' => array(
                 'type'    => 'segment',
                 'options' => array(
@@ -124,6 +140,7 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Node' => 'Application\Controller\NodeController',
             'Application\Controller\Job' => 'Application\Controller\JobController',
+            'Application\Controller\Execution' => 'Application\Controller\ExecutionController',
             'Application\Controller\Workflow' => 'Application\Controller\WorkflowController',
             'Application\Controller\Api' => 'Application\Controller\ApiController',
         ),
