@@ -2,7 +2,10 @@
 
 function smarty_function_icon($params, $smarty, &$repeat = false)
 {
-    $sLink  = '<a href="'.$params['href'].'">';
+    $sLink  = '<a href="'.$params['href'].'"';
+    if (isset($params['class'])) {
+        $sLink .= ' class="'.$params['class'].'">';
+    }
     $sLink .= '<span class="';
 
     switch($params['action']) {

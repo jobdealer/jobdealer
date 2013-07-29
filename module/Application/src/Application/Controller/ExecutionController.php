@@ -65,19 +65,19 @@ class ExecutionController extends AbstractActionController
             )
         );
 
-        #$request = $this->getRequest();
-        #if ($request->isPost()) {
-        #    $form->setData($request->getPost());
-        #    if ($form->isValid()) {
-        #        try {
-        #            $this->getNodeTable()->saveNode($node);
-        #            return $this->redirect()->toRoute('node');
-        #        } catch (\Exception $e) {
-        #            $pdoException = $e->getPrevious();
-        #            var_dump($pdoException);
-        #        }
-        #    }
-        #}
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                try {
+                    $this->getExecutionTable()->saveExecution($oExecution);
+                    return $this->redirect()->toRoute('node');
+                } catch (\Exception $e) {
+                    $pdoException = $e->getPrevious();
+                    var_dump($pdoException);
+                }
+            }
+        }
 
         return array(
             'id' => $iExecutionId,
@@ -89,10 +89,14 @@ class ExecutionController extends AbstractActionController
         $iNodeId = (int) $this->params()->fromRoute('id', 0);
         $iJobId = (int) $this->params()->fromRoute('job', 0);
 
+        $oJob = $this->getJobTable()->getJob($iJobId);
+
         $oExecution = new Execution();
         $aExecution = array(
             "nodeid" => $iNodeId,
             "jobid" => $iJobId,
+            "description" => $oJob->description,
+            "schedule" => $oJob->defaultschedule,
         );
 
         $oExecution->exchangeArray($aExecution);

@@ -19,23 +19,23 @@
             <button id="add-job" class="btn btn-primary">{$this->translate("Add jobs")}</button>
             <table class="table table-bordered table-hover">
                 <tr>
-                    <!--<th>#</th>-->
+                    <th>#</th>
                     <th>{$this->translate('Job')}</th>
                     <th>{$this->translate('Schedule')}</th>
                     <th>{$this->translate('Description')}</th>
                     <th>{$this->translate('Actions')}</th>
                 </tr>
                 {foreach $aExecution as $oExecution}
-                    <tr>
-                        <!--<td>{$this->escapeHtml($oExecution->id)}</td>-->
+                    <tr id="execution{$this->escapeHtml($oExecution->id)}">
+                        <td class="executionid">{$this->escapeHtml($oExecution->id)}</td>
                         <td>{$this->escapeHtml($oExecution->job->description)}</td>
                         <td>{$this->escapeHtml($oExecution->schedule)}</td>
                         <td>{$this->escapeHtml($oExecution->description)}</td>
                         <td>
                             {icon action='edit' title="{$this->translate('Edit')}"
                             href="{$this->url('execution', ['action'=>'edit', 'id' => $oExecution->id])}"}
-                            {icon action='delete' title="{$this->translate('Delete')}"
-                            href="{$this->url('execution', ['action'=>'delete', 'id' => $oExecution->id])}"}
+                            {icon action='delete' title="{$this->translate('Delete')}" class="delete-execution"
+                            href="#"}
                         </td>
                     </tr>
                     {foreachelse}
@@ -68,7 +68,7 @@
                         <td>{$this->escapeHtml($job->estimatedduration)}</td>
                         <td>
                             {icon action='add' title="{$this->translate('Add')}"
-                                href="{$this->url('node', ['action'=>'link', 'id' => $oNode->id, 'job' => $job->id])}"}
+                                href="{$this->url('execution', ['action'=>'link', 'id' => $oNode->id, 'job' => $job->id])}"}
                             {icon action='clone' title="{$this->translate('Clone')}" href="#"}
                         </td>
                     </tr>
@@ -79,6 +79,9 @@
         </table>
     </div>
 
+    <div id="delete-dialog">
+        {$this->translate("Are you sure ?")}
+    </div>
     {literal}
     <script>
         jQuery(
@@ -94,8 +97,21 @@
                         $('#add-job-dialog').dialog('open');
                     }
                 );
+                $('.delete-execution').on("click", function(){
+                    var executionId = $(this).closest('tr').find("td.executionid").html();
+                    var url = "/execution/delete/"+executionId;
+                    $('#delete-dialog')
+                            .dialog('open')
+                            .data('url', url)
+                            .data('executionId', executionId)
+                            .dialog('close')
+                            .dialog('open');
+                });
                 $('#add-job-dialog').dialog({
                     autoOpen: false, height: 400, width: 800, modal: true, closeOnEscape: true,
+                    open: function(){
+                        $(this).append($(this).data('executionId'));
+                    },
                     buttons:{
                         'Add new job': function() {
                             window.location('#');
@@ -103,6 +119,21 @@
                         'Done': function() {
                             console.log('Done');
                             $(this).dialog('close');
+                        }
+                    }
+                });
+                $('#delete-dialog').dialog({
+                    autoOpen: false, modal: true, closeOnEscape: false,
+                    buttons:{
+                        'Yes': function (){
+                            $.ajax({
+                                type: 'get', dataType:'html', url: $(this).data('url'), async: false
+                            });
+                            $('#execution'+$(this).data('executionId')).remove();
+                            $(this).dialog("close");
+                        },
+                        'No' : function(){
+                            $(this).dialog("close");
                         }
                     }
                 });
